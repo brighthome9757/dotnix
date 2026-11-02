@@ -2,14 +2,14 @@
   description = "Home Manager configuration";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/release-25.05";
+    nixpkgs.url = "nixpkgs/release-26.05";
     nixpkgs-unstable.url = "nixpkgs/nixpkgs-unstable"; # TODO Enable both stable and unstable
     nix-darwin = {
-      url = "github:LnL7/nix-darwin/nix-darwin-25.05";
+      url = "github:LnL7/nix-darwin/nix-darwin-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -21,6 +21,10 @@
         specialArgs = {
           pkgsUnstable = import nixpkgs-unstable {
             system = "aarch64-darwin";
+            allowUnfreePredicate = pkg:
+              builtins.elem (nixpkgs-unstable.lib.getName pkg) [
+                "raycast"
+              ];
           };
         };
         modules = [
@@ -33,6 +37,14 @@
             home-manager.extraSpecialArgs = {
               pkgsUnstable = nixpkgs-unstable {
                 system = "aarch64-darwin";
+                config = {
+                  allowUnfreePredicate = pkg:
+                    builtins.elem (nixpkgs-unstable.lib.getName pkg) [
+                      "claude-code"
+                      # "notion-app"
+                      "raycast"
+                    ];
+                };
               };
             };
           }

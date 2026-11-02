@@ -88,14 +88,15 @@ in
   ### Package Management (via nixpkgs and homebrew)
   ##################################################################################################
 
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    # "blender"
-    "raycast"
-    "tableplus"
-    "terraform"
-    "vscode"
-    "Xcode.app"
-  ];
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      # "blender"
+      "raycast"
+      "tableplus"
+      "terraform"
+      "vscode"
+      "Xcode.app"
+    ];
 
   environment.variables = {
     DO_NOT_TRACK = "1";
@@ -116,6 +117,9 @@ in
     ++ (with pkgs;
     [
       config.nix.package # Per https://discourse.nixos.org/t/how-to-upgrade-nix-on-macos-with-home-manager/25147/4
+
+      # Terminal Emulator
+      ghostty-bin
 
       # GB
       mosh # https://mosh.org/#techinfo
@@ -144,7 +148,7 @@ in
       terraform
 
       # Data
-      sqlcheck # SQL Anti-Pattern Linter
+      # sqlcheck # SQL Anti-Pattern Linter
       tableplus # db client
       # python312Packages.sqlglot # SQL Parser (used in sqlmesh)
 
@@ -172,7 +176,7 @@ in
       cachix
       haskellPackages.nix-derivation
       nil # https://github.com/oxalica/nil#readme
-      nix-direnv
+      # nix-direnv
       nix-info
       nix-tree
       nix-update # for pr-ing version updates to nixpkgs
@@ -184,10 +188,6 @@ in
       tailscale # work vpn
 
       # Other
-
-      # Mac OS Setup - Scarf Deps - https://www.notion.so/scarf/Mac-OS-setup-...
-      curlWithGnuTls
-      wget
     ]);
 
   # Provided by nix-darwin.

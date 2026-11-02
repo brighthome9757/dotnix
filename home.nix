@@ -94,13 +94,13 @@
     ];
   };
 
-  programs.direnv.enable = true;
-  programs.direnv = {
-    nix-direnv.enable = true;
+  # programs.direnv.enable = true;
+  # programs.direnv = {
+  #   nix-direnv.enable = true;
 
-    enableBashIntegration = true;
-    enableNushellIntegration = true;
-  };
+  #   enableBashIntegration = true;
+  #   enableNushellIntegration = true;
+  # };
 
   programs.eza.enable = true;
   programs.eza = {
@@ -116,6 +116,11 @@
     enableBashIntegration = true;
   };
 
+  # programs.ghostty.enable = true;
+  # programs.ghostty = {
+
+  # };
+
   # Gitconfig written to ~/.config/git/config
   programs.git.enable = true;
   programs.git = {
@@ -123,8 +128,12 @@
     # ignores = [
     #   *.local
     # ];
-    userEmail = "fast.can6663@fastmail.com";
-    userName = "John Doe";
+    settings = {
+      user = {
+        email = "fast.can6663@fastmail.com";
+        name = "John Doe";
+      };
+    };
   };
 
   programs.jq.enable = true;
@@ -141,19 +150,19 @@
     };
   };
 
-  programs.neovim.enable = true;
-  programs.neovim = {
-    defaultEditor = false;
-    viAlias = true;
-    vimAlias = true;
-    vimdiffAlias = true;
+  # programs.neovim.enable = true;
+  # programs.neovim = {
+  #   defaultEditor = false;
+  #   viAlias = true;
+  #   vimAlias = true;
+  #   vimdiffAlias = true;
 
-    extraPackages = [ ];
-    extraPython3Packages = ps: [ ];
-    plugins = with pkgs.vimPlugins; [
-      telescope-nvim
-    ];
-  };
+  #   extraPackages = [ ];
+  #   extraPython3Packages = ps: [ ];
+  #   plugins = with pkgs.vimPlugins; [
+  #     telescope-nvim
+  #   ];
+  # };
 
   programs.nix-index.enable = true;
   programs.nix-index = {
@@ -282,13 +291,13 @@
           version = "0.1.8";
           sha256 = "sha256-LTCTCdbf/M2q45M34HCQoDEoDeFiOPUOKVcOLXIU9J0=";
         }
-        {
-          # Automatically load environments with direnv
-          name = "direnv";
-          publisher = "mkhl";
-          version = "0.17.0";
-          sha256 = "sha256-T+bt6ku+zkqzP1gXNLcpjtFAevDRiSKnZaE7sM4pUOs=";
-        }
+        # {
+        #   # Automatically load environments with direnv
+        #   name = "direnv";
+        #   publisher = "mkhl";
+        #   version = "0.17.0";
+        #   sha256 = "sha256-T+bt6ku+zkqzP1gXNLcpjtFAevDRiSKnZaE7sM4pUOs=";
+        # }
         {
           # TODO Get from pkgs-unstable
           # Jinja Templating: *.{sql,js,etc}.jinja syntax highlighting
